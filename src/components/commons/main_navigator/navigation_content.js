@@ -1,29 +1,64 @@
 'use strict';
 
-var React = require('react-native');
-var {
+import React, {
+  Component,
+  PropTypes,
   View,
-  } = React;
+} from 'react-native';
 
-var NavigationBar = require('./navigation_bar');
+import NavigationBar from './navigation_bar';
 
-var TabView = require('../tab_view');
+import TabView from '../tab_view';
 
 import TabViewContainer from '../../../containers/tab_view';
 
-var NewsPage = require('../../pages/news_page');
+import BusPage from '../../pages/bus_page';
+import FilePage from '../../pages/file_page';
+import MapPage from '../../pages/map_page';
+import NewsPage from '../../pages/news_page';
+import SettingPage from '../../pages/setting_page';
 
-var NavigationContent = React.createClass({
+class NavigationContent extends Component {
 
-  render: function () {
+  render() {
+
+    let { tab } = this.props;
+
+    let page;
+    switch (tab) {
+      case 'bus':
+        page = <BusPage />;
+        break;
+      case 'file':
+        page = <FilePage />;
+        break;
+      case 'map':
+        page = <MapPage />;
+        break;
+      case 'news':
+        page = <NewsPage />;
+        break;
+      case 'setting':
+      default:
+        page = <SettingPage />
+    }
+
     return (
-      <View style={{ flex: 1}}>
-        <NavigationBar />
-        <NewsPage />
+      <View style={{ flex: 1 }}>
+        <NavigationBar title={this.props.title}/>
+
+        { page }
+
         <TabViewContainer />
       </View>
     );
   }
-});
 
-module.exports = NavigationContent;
+}
+
+NavigationContent.propTypes = {
+  title: PropTypes.string.isRequired,
+  tab: PropTypes.string.isRequired
+};
+
+export default NavigationContent;

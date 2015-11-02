@@ -1,25 +1,26 @@
 'use strict';
 
-var React = require('react-native');
-var {
+import React,{
+  Component,
+  PropTypes,
   View,
   Text,
   StyleSheet,
-  } = React;
+} from 'react-native';
 
-var NavigationBar = React.createClass({
-  render: function () {
+class NavigationBar extends Component {
+  render() {
     return (
       <View style={styles.container}>
         <View style={styles.barButton}></View>
         <View style={styles.titleContainer}>
-          <Text style={styles.title}>Title</Text>
+          <Text style={styles.title}>{this.props.title}</Text>
         </View>
         <View style={styles.barButton}></View>
       </View>
     );
   }
-});
+}
 
 var styles = StyleSheet.create({
   container: {
@@ -47,4 +48,8 @@ var styles = StyleSheet.create({
   }
 });
 
-module.exports = NavigationBar;
+NavigationBar.propTypes = {
+  title: PropTypes.string.isRequired,
+};
+
+export default NavigationBar;

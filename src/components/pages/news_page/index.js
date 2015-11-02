@@ -13,7 +13,7 @@ let NewsList = require('./news_list');
 var NewsPage = React.createClass({
     render: function() {
         return (
-          <View style={{ flex: 1}}>
+          <View style={styles.container}>
             <Text>Hi</Text>
             <Text>Hi</Text>
             <Text>Hi</Text>
@@ -24,6 +24,12 @@ var NewsPage = React.createClass({
           </View>
         );
     }
+});
+
+let styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
 });
 
 module.exports = NewsPage;

@@ -18,8 +18,6 @@ class TabButton extends Component {
   }
 
   render() {
-
-    console.log('render');
     let image = require('image!news');
     switch (this.props.name) {
       case 'bus':
