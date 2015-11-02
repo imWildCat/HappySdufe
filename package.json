@@ -1,0 +1,16 @@
+{
+  "name": "HappySdufe",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "react-native start"
+  },
+  "dependencies": {
+    "react": "^0.14.1",
+    "react-native": "^0.13.2",
+    "react-redux": "^3.1.0",
+    "redux": "^3.0.4",
+    "redux-logger": "^2.0.4",
+    "redux-thunk": "^1.0.0"
+  }
+}
