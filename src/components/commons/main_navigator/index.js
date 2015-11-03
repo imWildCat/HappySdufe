@@ -70,7 +70,6 @@ class MainNavigator extends Component {
     // Title
     let title = this._getTabName(tab);
 
-    console.log(map.campus);
     // Title for map
     if (tab === 'map' && map.campus !== 'none') {
       let campus = '';

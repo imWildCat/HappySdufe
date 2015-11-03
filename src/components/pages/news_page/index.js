@@ -2,29 +2,37 @@
 
 var React = require('react-native');
 var {
+  Component,
   StyleSheet,
   Text,
   View,
   NavigatorIOS,
-} = React;
+  } = React;
 
 let NewsList = require('./news_list');
 
-var NewsPage = React.createClass({
-    render: function() {
-        return (
-          <View style={styles.container}>
-            <Text>Hi</Text>
-            <Text>Hi</Text>
-            <Text>Hi</Text>
-            <Text>Hi</Text>
-            <Text>Hi</Text>
-            <Text>Hi</Text>
-            <Text>Hi</Text>
-          </View>
-        );
-    }
-});
+class NewsPage extends Component {
+
+  componentDidMount() {
+    console.log(this);
+    this.props.loadNewsList();
+  }
+
+  render () {
+
+    return (
+      <View style={styles.container}>
+        <Text>Hi</Text>
+        <Text>Hi</Text>
+        <Text>Hi</Text>
+        <Text>Hi</Text>
+        <Text>Hi</Text>
+        <Text>Hi</Text>
+        <Text>Hi</Text>
+      </View>
+    );
+  }
+}
 
 let styles = StyleSheet.create({
   container: {

@@ -15,7 +15,7 @@ export default function (state = initialState, action = null) {
       return Object.assign({}, { slug: 'file'});
     case types.TAB_MAP:
       return Object.assign({}, { slug: 'map'});
-    case types.NEWS:
+    case types.TAB_NEWS:
       return Object.assign({}, { slug: 'news'});
     case types.TAB_SETTING:
       return Object.assign({}, { slug: 'setting'});

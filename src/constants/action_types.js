@@ -9,3 +9,8 @@ export const TAB_SETTING = 'TAB_SETTING';
 
 // Map
 export const CHANGE_MAP_CAMPUS = 'CHANGE_MAP_CAMPUS';
+
+// News
+export const NEWS_LIST_REQUEST = 'NEWS_LIST_REQUEST';
+export const NEWS_LIST_SUCCESS = 'NEWS_LIST_SUCCESS';
+export const NEWS_LIST_FAILURE = 'NEWS_LIST_FAILURE';

@@ -3,9 +3,12 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
+import APIRequestMiddleware from '../middlewares/api_request_middleware';
+import APIClient from '../utils/api_client';
 import reducer from '../reducers';
 
 export default function configureStore(initialState) {
+  let apiRequestMiddleware = APIRequestMiddleware(new APIClient());
   var createStoreWithMiddleware;
   if (__DEV__) {
     const logger = createLogger({
@@ -15,11 +18,13 @@ export default function configureStore(initialState) {
     });
     createStoreWithMiddleware= applyMiddleware(
       thunk,
+      apiRequestMiddleware,
       logger
     )(createStore);
   } else {
     createStoreWithMiddleware= applyMiddleware(
-      thunk
+      thunk,
+      apiRequestMiddleware
     )(createStore);
   }
 

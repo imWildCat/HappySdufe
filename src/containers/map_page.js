@@ -1,7 +1,5 @@
 'use strict';
 
-'use strict';
-
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux/native';
 import MapPage from '../components/pages/map_page';

@@ -36,7 +36,6 @@ class MapPage extends Component {
   }
 
   render() {
-    console.log(this.state);
     return (
       <View style={styles.container}>
         <MapView style={styles.map}

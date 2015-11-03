@@ -1,6 +1,6 @@
 'use strict';
 
-let types = require('../constants/action_types');
+import * as types from '../constants/action_types' ;
 
 export function switchToTabBus() {
   return {
