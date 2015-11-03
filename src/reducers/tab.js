@@ -2,29 +2,24 @@
 
 let types = require('../constants/action_types');
 
-let initialState = 'news';
+let initialState = {
+  slug: 'news'
+};
 
 export default function (state = initialState, action = null) {
 
   switch (action.type) {
     case types.TAB_BUS:
-      state = 'bus';
-      break;
+      return Object.assign({}, { slug: 'bus'});
     case types.TAB_FILE:
-      state = 'file';
-      break;
+      return Object.assign({}, { slug: 'file'});
     case types.TAB_MAP:
-      state = 'map';
-      break;
+      return Object.assign({}, { slug: 'map'});
     case types.NEWS:
-      state = 'news';
-      break;
+      return Object.assign({}, { slug: 'news'});
     case types.TAB_SETTING:
-      state = 'setting';
-      break;
+      return Object.assign({}, { slug: 'setting'});
     default:
-      return initialState;
+      return state;
   }
-
-  return state;
 }

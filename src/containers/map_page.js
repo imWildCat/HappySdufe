@@ -1,13 +1,14 @@
 'use strict';
 
+'use strict';
+
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux/native';
-import MainNavigator from '../components/commons/main_navigator';
+import MapPage from '../components/pages/map_page';
 import * as MapActions from '../actions/map';
 
 function mapStateToProps(state) {
   return {
-    tab: state.tab.slug,
     map: state.map
   };
 }
@@ -16,4 +17,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(MapActions, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainNavigator);
+export default connect(mapStateToProps, mapDispatchToProps)(MapPage);

@@ -14,7 +14,7 @@ import TabViewContainer from '../../../containers/tab_view';
 
 import BusPage from '../../pages/bus_page';
 import FilePage from '../../pages/file_page';
-import MapPage from '../../pages/map_page';
+import MapPageContainer from '../../../containers/map_page';
 import NewsPage from '../../pages/news_page';
 import SettingPage from '../../pages/setting_page';
 
@@ -33,7 +33,7 @@ class NavigationContent extends Component {
         page = <FilePage />;
         break;
       case 'map':
-        page = <MapPage />;
+        page = <MapPageContainer />;
         break;
       case 'news':
         page = <NewsPage />;
@@ -45,7 +45,7 @@ class NavigationContent extends Component {
 
     return (
       <View style={{ flex: 1 }}>
-        <NavigationBar title={this.props.title}/>
+        <NavigationBar {...this.props} />
 
         { page }
 
@@ -57,8 +57,6 @@ class NavigationContent extends Component {
 }
 
 NavigationContent.propTypes = {
-  title: PropTypes.string.isRequired,
-  tab: PropTypes.string.isRequired
 };
 
 export default NavigationContent;

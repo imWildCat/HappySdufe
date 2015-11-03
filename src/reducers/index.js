@@ -1,8 +1,10 @@
 'use strict';
 
-let { combineReducers } = require('redux');
-let tab = require('./tab');
+import { combineReducers } from 'redux';
+import map from './map';
+import tab from './tab';
 
 export default combineReducers({
+  map,
   tab
 });

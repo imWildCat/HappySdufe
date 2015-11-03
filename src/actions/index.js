@@ -1,9 +1,12 @@
 'use strict';
 
-let tab_actions = require('./tab');
+import map_actions from './map';
+import tab_actions from './tab';
 
 let actions = {};
 
-Object.assign(actions, tab_actions);
+Object.assign(actions,
+  map_actions,
+  tab_actions);
 
 export default actions;

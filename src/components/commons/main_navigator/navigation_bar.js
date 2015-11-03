@@ -5,10 +5,12 @@ import React,{
   PropTypes,
   View,
   Text,
+  TouchableOpacity,
   StyleSheet,
 } from 'react-native';
 
 class NavigationBar extends Component {
+
   render() {
     return (
       <View style={styles.container}>
@@ -16,11 +18,22 @@ class NavigationBar extends Component {
         <View style={styles.titleContainer}>
           <Text style={styles.title}>{this.props.title}</Text>
         </View>
-        <View style={styles.barButton}></View>
+        <View style={styles.barButton}>
+          <TouchableOpacity onPress={() => this.props.onRightBarButtonClick()}>
+            <Text style={styles.barButtonText}>{this.props.rightBarButtonText}</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
 }
+
+NavigationBar.propTypes = {
+  title: PropTypes.string.isRequired,
+  tab: PropTypes.string.isRequired,
+  rightBarButtonText: PropTypes.string,
+  onRightBarButtonClick: PropTypes.func
+};
 
 var styles = StyleSheet.create({
   container: {
@@ -33,10 +46,10 @@ var styles = StyleSheet.create({
   titleContainer: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    paddingTop:15
   },
   title: {
-    marginTop: 10,
     fontSize: 16,
     fontWeight: '600',
     textAlign: 'center',
@@ -44,12 +57,16 @@ var styles = StyleSheet.create({
   },
   barButton: {
     width: 60,
+    paddingTop: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 16
     //backgroundColor: 'red'
+  },
+  barButtonText: {
+    fontSize: 15,
   }
 });
 
-NavigationBar.propTypes = {
-  title: PropTypes.string.isRequired,
-};
 
 export default NavigationBar;

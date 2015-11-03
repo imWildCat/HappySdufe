@@ -7,7 +7,7 @@ import * as Actions from '../actions/tab';
 
 function mapStateToProps(state) {
   return {
-    tab: state.tab
+    tab: state.tab.slug
   };
 }
 
