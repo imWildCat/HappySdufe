@@ -36,16 +36,6 @@ class NewsPage extends Component {
 
   constructor(props) {
     super(props);
-    console.log('parent init');
-
-  }
-
-  _fetchNewsList(props = null) {
-    //if (props) {
-    //  this.props.fetchNewsList(props.news.currentCategoryID);
-    //} else {
-    //  this.props.fetchNewsList(this.props.news.currentCategoryID);
-    //}
   }
 
   componentWillMount() {
@@ -55,19 +45,6 @@ class NewsPage extends Component {
     NewsCategoryNames.forEach((name, index) => {
       this.newsListArray.push(<NewsList key={'list_' + (index + 1)} {...this.props} categoryID={index + 1} />);
     });
-  }
-
-  componentDidMount() {
-    this._fetchNewsList()
-  }
-
-  componentWillReceiveProps(nextProps) {
-    let categoryName = NewsCategoryNames[nextProps.news.currentCategoryID - 1];
-    let categoryPages = nextProps.news[categoryName].pages;
-    let hasNewPage = nextProps.news[categoryName].hasMorePage;
-    if (categoryPages == 0 && hasNewPage) {
-      this._fetchNewsList(nextProps);
-    }
   }
 
   render() {
