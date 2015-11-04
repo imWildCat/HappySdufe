@@ -6,6 +6,7 @@
     "start": "react-native start"
   },
   "dependencies": {
+    "moment": "^2.10.6",
     "react": "^0.14.1",
     "react-native": "^0.13.2",
     "react-native-html-render": "^1.0.2",

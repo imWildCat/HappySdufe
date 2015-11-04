@@ -1,27 +1,126 @@
 'use strict';
 
-var React = require('react-native');
-var {
+import React, {
+  Component,
+  PropTypes,
   StyleSheet,
   Text,
   View,
-  Navigator,
-} = React;
+  TouchableHighlight,
+  ListView,
+} from 'react-native';
 
-var NewsList = React.createClass({
-    render: function() {
-        return (
-          <View>
-            <Text>Hi</Text>
-            <Text>Hi</Text>
-            <Text>Hi</Text>
-            <Text>Hi</Text>
-            <Text>Hi</Text>
-            <Text>Hi</Text>
-            <Text>Hi</Text>
-          </View>
-        );
+import moment from 'moment';
+import zhLocale from 'moment/locale/zh-cn';
+moment.locale('zh-cn', zhLocale);
+
+import NewsCategoryNames from '../../../constants/news_category_names';
+
+class NewsList extends Component {
+
+  static _generateDataSource(pageData) {
+    let dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id});
+    return dataSource.cloneWithRows(pageData)
+  }
+
+  render() {
+    let { news, loadSingleNews } = this.props;
+    let currentCategoryName = NewsCategoryNames[news.currentCategoryID - 1];
+    let currentCategoryPages = news[currentCategoryName].pages;
+
+    if (currentCategoryPages.length > 0) {
+      let currentPageData = currentCategoryPages[0];
+
+      return (
+        <ListView
+          dataSource={NewsList._generateDataSource(currentPageData)}
+          renderRow={(rowData) => <NewsListRow
+          key={`news_${rowData.id}`}
+          data={rowData}
+          loadSingleNews={loadSingleNews} />}
+          />
+      );
+    } else {
+      return (
+        <View>
+          <Text>No data</Text>
+        </View>
+      )
     }
+
+  }
+}
+
+NewsList.propTypes = {
+  news: PropTypes.object.isRequired,
+  loadSingleNews: PropTypes.func.isRequired,
+};
+
+
+class NewsListRow extends Component {
+
+  render() {
+    let { data, loadSingleNews } = this.props;
+    return (
+      <TouchableHighlight underlayColor='#D8D8D8' onPress={() => {
+        if (data.id) {
+          loadSingleNews(data.id);
+        } else {
+          console.log('ID of this news is not defined.');
+        }
+      }}>
+        <View style={styles.rowWrapper}>
+          <View>
+            <Text style={styles.title}>
+              {data.title}
+            </Text>
+          </View>
+          <View style={styles.meta}>
+            <Text style={styles.editorText}>
+              {data.editor}
+            </Text>
+            <Text style={styles.dateText}>
+              {moment(data.date).fromNow()}
+            </Text>
+          </View>
+        </View>
+      </TouchableHighlight>
+    )
+  }
+}
+
+NewsListRow.propTypes = {
+  data: PropTypes.object.isRequired,
+  loadSingleNews: PropTypes.func.isRequired,
+};
+
+let styles = StyleSheet.create({
+  rowWrapper: {
+    marginLeft: 16,
+    paddingRight: 16,
+    paddingBottom: 16,
+    marginTop: 16,
+    borderBottomColor: '#D8D8D8',
+    borderBottomWidth: 1
+  },
+  title: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: "#333333",
+  },
+  meta: {
+    marginTop: 5,
+    flexDirection: 'row',
+  },
+  editorText: {
+    color: '#747474',
+    flex: 1,
+  },
+  dateText: {
+    color: '#747474',
+    flex: 1,
+    textAlign: 'right'
+  },
 });
 
-module.exports = NewsList;
+export default NewsList;

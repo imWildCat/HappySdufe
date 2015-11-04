@@ -57,6 +57,10 @@ class NavigationContent extends Component {
 }
 
 NavigationContent.propTypes = {
+  title: PropTypes.string.isRequired,
+  tab: PropTypes.string.isRequired,
+  rightBarButtonText: PropTypes.string,
+  onRightBarButtonClick: PropTypes.func
 };
 
 export default NavigationContent;
