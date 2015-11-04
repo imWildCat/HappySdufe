@@ -27,7 +27,7 @@ class ActivityIndicator extends Component {
 }
 
 ActivityIndicator.propTypes = {
-  autoMargin: PropTypes.boolean
+  autoMargin: PropTypes.bool
 };
 
 let styles = StyleSheet.create({

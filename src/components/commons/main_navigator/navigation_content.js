@@ -41,7 +41,7 @@ class NavigationContent extends Component {
     }
 
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, backgroundColor: '#FCFBF9' }}>
 
         { page }
 
@@ -53,7 +53,6 @@ class NavigationContent extends Component {
 }
 
 NavigationContent.propTypes = {
-  title: PropTypes.string.isRequired,
   tab: PropTypes.string.isRequired,
   rightBarButtonText: PropTypes.string,
   onRightBarButtonClick: PropTypes.func

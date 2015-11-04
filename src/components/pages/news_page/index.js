@@ -34,34 +34,62 @@ class MenuButton extends Component {
 
 class NewsPage extends Component {
 
+  constructor(props) {
+    super(props);
+    console.log('parent init');
+
+  }
+
+  _fetchNewsList(props = null) {
+    //if (props) {
+    //  this.props.fetchNewsList(props.news.currentCategoryID);
+    //} else {
+    //  this.props.fetchNewsList(this.props.news.currentCategoryID);
+    //}
+  }
+
+  componentWillMount() {
+    // News list array and menu
+    this.newsListArray = [];
+
+    NewsCategoryNames.forEach((name, index) => {
+      this.newsListArray.push(<NewsList key={'list_' + (index + 1)} {...this.props} categoryID={index + 1} />);
+    });
+  }
+
   componentDidMount() {
-    this.props.fetchNewsList();
+    this._fetchNewsList()
   }
 
   componentWillReceiveProps(nextProps) {
-
+    let categoryName = NewsCategoryNames[nextProps.news.currentCategoryID - 1];
+    let categoryPages = nextProps.news[categoryName].pages;
+    let hasNewPage = nextProps.news[categoryName].hasMorePage;
+    if (categoryPages == 0 && hasNewPage) {
+      this._fetchNewsList(nextProps);
+    }
   }
 
-  render () {
+  render() {
     let { news, changeNewsCategory } = this.props;
     let menuButtons = [];
     NewsCategoryNames.forEach((name, index) => {
       menuButtons.push(<MenuButton key={`btn_${index}`}
-                                   isHighlighted={index+1 == news.currentCategoryID}
-                                   text={name}
-                                   onClick={() => changeNewsCategory(index + 1)} />)
+                                        isHighlighted={index + 1 == news.currentCategoryID}
+                                        text={name}
+                                        onClick={() => changeNewsCategory(index + 1)}/>)
     });
 
     return (
       <View style={styles.container}>
-        <NavigationBar title='校园新闻' />
+        <NavigationBar title='校园新闻'/>
         <View style={styles.scrollViewWrapper}>
           <ScrollView showsHorizontalScrollIndicator={false} horizontal={true}>
             {menuButtons}
           </ScrollView>
         </View>
         <View style={styles.listView}>
-          <NewsList {...this.props} />
+          {this.newsListArray[news.currentCategoryID-1]}
         </View>
       </View>
     );

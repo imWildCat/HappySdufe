@@ -4,3 +4,10 @@ const categoryNames = ['综合新闻', '新闻头条', '新闻聚焦', '院系�
   '讲座预告', '校园传真', '影像财大', '领导讲话', '财大论坛', '人物风采', '视频财大'];
 
 export default categoryNames;
+
+export function getCategoryNameByID(id) {
+  if (id < 0 || id > categoryNames.length) {
+    return null;
+  }
+  return categoryNames[id - 1];
+}

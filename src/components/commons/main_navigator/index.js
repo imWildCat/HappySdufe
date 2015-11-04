@@ -102,33 +102,6 @@ class MainNavigator extends Component {
     // Title
     let title = this._getTabName(tab);
 
-    // Title for map
-    if (tab === 'map' && map.campus !== 'none') {
-      let campus = '';
-      switch (map.campus) {
-        case 'shungeng':
-          campus = '舜耕';
-          break;
-        case 'yanshan':
-          campus = '燕山';
-          break;
-        case 'shengjing':
-          campus = '圣井';
-          break;
-        case 'mingshui':
-        default:
-          campus = '明水'
-
-      }
-      title += `（${campus}）`;
-    }
-
-    // Right button
-    let rightBarButtonText = '';
-    if (tab === 'map') {
-      rightBarButtonText = '选择校区';
-    }
-
     return (
       <Navigator
         ref={view => this.navigator = view}

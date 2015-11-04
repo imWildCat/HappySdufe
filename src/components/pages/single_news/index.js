@@ -59,7 +59,8 @@ class SingleNewsPage extends Component {
 
 let styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: '#FCFBF9'
   },
   scrollView: {
     padding: 16
@@ -76,26 +77,26 @@ let styles = StyleSheet.create({
   },
   editorText: {
     flex: 1,
+    color: '#747474',
     fontSize: 14
   },
   dateText: {
     flex: 1,
+    color: '#747474',
     textAlign: 'right',
     fontSize: 14
   },
-  contentView: {
-
-  }
+  contentView: {}
 });
 
 let contentStyles = StyleSheet.create({
   p: {
     fontSize: 16,
-    textAlign: 'center',
-    margin: 1,
-    padding: 1
+    color: '#333333'
   },
   div: {
+    fontSize: 16,
+    color: '#333333'
   }
 });
 

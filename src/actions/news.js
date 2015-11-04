@@ -2,10 +2,12 @@
 
 let types = require('../constants/action_types');
 
-export function fetchNewsList(categoryID = 0, page = 1) {
+export function fetchNewsList(categoryID = 1, page = 1) {
   return {
     types: [types.NEWS_LIST_REQUEST, types.NEWS_LIST_SUCCESS, types.NEWS_LIST_FAILURE],
-    apiRequest: (client) => client.get(`news/category/${categoryID}/page/${page}`)
+    apiRequest: (client) => client.get(`news/category/${categoryID}/page/${page}`),
+    categoryID: categoryID,
+    page: page,
   }
 }
 

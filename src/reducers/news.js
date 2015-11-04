@@ -2,7 +2,7 @@
 
 import { combineReducers } from 'redux';
 import * as types from '../constants/action_types' ;
-import NewsCategoryNames from '../constants/news_category_names';
+import NewsCategoryNames, { getCategoryNameByID } from '../constants/news_category_names';
 
 let initialListState = {
   currentCategoryID: 1
@@ -11,8 +11,9 @@ let initialListState = {
 NewsCategoryNames.forEach((name) => {
   initialListState[name] = {
     page: 0,
-    hasNewPage: true,
+    hasMorePage: true,
     pages: [],
+    isLoadingMore: false,
   };
 });
 
@@ -54,26 +55,38 @@ function singleNews(state = {
 }
 
 function newsList(state = initialListState, action = null) {
-
+  let newState = Object.assign({}, state);
   switch (action.type) {
     // News category:
     case types.CHANGE_NEWS_CATEGORY:
       return Object.assign({}, state, {currentCategoryID: action.categoryID});
     // Fetch news list:
     case types.NEWS_LIST_REQUEST:
-      return state;
+      if(action.page > 1) {
+        newState[getCategoryNameByID(action.categoryID)].isLoadingMore = true;
+      } else {
+        newState[getCategoryNameByID(action.categoryID)].isLoading = true;
+      }
+      return newState;
     case types.NEWS_LIST_SUCCESS:
-      //console.log(action.json);
-      let newState = Object.assign({}, state);
+      newState[getCategoryNameByID(action.categoryID)].isLoading = false;
+      if(action.page > 1) {
+        newState[getCategoryNameByID(action.categoryID)].isLoadingMore = false;
+      }
+
       let json = action.json;
       newState[action.json.category_name].page = json.page;
-      newState[action.json.category_name].hasNewsPage = json.has_new_page;
+      newState[action.json.category_name].hasMorePage = json.has_more_page;
       newState[action.json.category_name].pages[json.page - 1] = json.news_list;
       //console.log(newState);
       return newState;
     case types.NEWS_LIST_FAILURE:
+      newState[getCategoryNameByID(action.categoryID)].isLoading = false;
+      if(action.page > 1) {
+        newState[getCategoryNameByID(action.categoryID)].isLoadingMore = false;
+      }
       console.log(action.error);
-      return state;
+      return newState;
 
     // Fetch single news:
     case types.SINGLE_NEWS_REQUEST:

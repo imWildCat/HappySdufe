@@ -15,38 +15,101 @@ import NewsCategoryNames from '../../../constants/news_category_names';
 
 class NewsList extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      footer: '点击加载更多'
+    };
+  }
+
   static _generateDataSource(pageData) {
     let dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id});
     return dataSource.cloneWithRows(pageData)
   }
 
+  _getNewsListData(props = null) {
+    var news, categoryID;
+    if (props) {
+      news = props.news;
+      categoryID = props.categoryID;
+    } else {
+      news = this.props.news;
+      categoryID = this.props.categoryID;
+    }
+
+    let currentCategoryName = NewsCategoryNames[categoryID - 1];
+    return news[currentCategoryName];
+  }
+
+  componentDidMount() {
+    this.props.fetchNewsList(this.props.categoryID);
+  }
+
   render() {
-    let { news, fetchSingleNews } = this.props;
-    let currentCategoryName = NewsCategoryNames[news.currentCategoryID - 1];
-    let currentCategoryPages = news[currentCategoryName].pages;
+    let { fetchSingleNews } = this.props;
+    let newsListData = this._getNewsListData();
+    let currentCategoryPages = newsListData.pages;
 
     if (currentCategoryPages.length > 0) {
-      let currentPageData = currentCategoryPages[0];
+      let currentPageData = [];
+      currentCategoryPages.forEach((singlePage) => {
+        currentPageData = currentPageData.concat(singlePage)
+      });
 
       return (
         <ListView
           dataSource={NewsList._generateDataSource(currentPageData)}
-          renderRow={(rowData) => <NewsListRow
-          key={`news_${rowData.id}`}
-          data={rowData}
-          fetchSingleNews={fetchSingleNews} />}
+          renderFooter={this._renderFooter.bind(this)}
+          renderRow={
+          (rowData) =>
+          <NewsListRow
+            key={`news_${rowData.id}`}
+            data={rowData}
+            fetchSingleNews={fetchSingleNews} />
+            }
           />
       );
     } else {
       return (
         <View style={parentStyles.notFoundWrapper}>
           <View style={parentStyles.notFoundTextWrapper}>
-            <Text>没有找到这个分类下的相关新闻。</Text>
+            <Text>加载中...</Text>
           </View>
         </View>
       )
     }
+  }
 
+  _loadMorePage() {
+    let { fetchNewsList, categoryID } = this.props;
+    if (this._getNewsListData().hasMorePage) {
+      fetchNewsList(categoryID, this._getNewsListData().page + 1);
+    } else {
+
+    }
+  }
+
+  _onFooterClick() {
+    this._loadMorePage()
+  }
+
+  _renderFooter() {
+    let newsListData = this._getNewsListData();
+    let text = '';
+    if (newsListData.isLoadingMore) {
+      text = '加载中...';
+    } else if (newsListData.hasMorePage) {
+      text = '点击加载更多'
+    } else {
+      text = '已全部加载完毕';
+    }
+    return (
+      <View style={parentStyles.headerAndFooterWrapper}>
+        <Text onPress={this._onFooterClick.bind(this)} style={parentStyles.text}>
+          {text}
+        </Text>
+      </View>
+    );
   }
 }
 
@@ -59,12 +122,19 @@ let parentStyles = StyleSheet.create({
   notFoundTextWrapper: {
     flex: 1,
     paddingTop: 30
-  }
+  },
+  headerAndFooterWrapper: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 50
+  },
+  footerText: {}
 });
 
 NewsList.propTypes = {
   news: PropTypes.object.isRequired,
   fetchSingleNews: PropTypes.func.isRequired,
+  categoryID: PropTypes.number.isRequired
 };
 
 
