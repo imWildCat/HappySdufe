@@ -10,6 +10,8 @@ import React, {
   PropTypes,
 } from 'react-native';
 
+import NavigationBar from '../../commons/navigation_bar';
+
 import points from './points';
 
 import CampusRegions from './campus_regions';
@@ -25,6 +27,27 @@ class MapPage extends Component {
     };
   }
 
+  _showActionSheet() {
+    let BUTTONS = [
+      '舜耕校区',
+      '燕山校区',
+      '圣井校区',
+      '明水校区',
+      '取消',
+    ];
+    var CANCEL_INDEX = 4;
+
+    ActionSheetIOS.showActionSheetWithOptions({
+        options: BUTTONS,
+        cancelButtonIndex: CANCEL_INDEX,
+        //destructiveButtonIndex: DESTRUCTIVE_INDEX,
+      },
+      (buttonIndex) => {
+        this.props.changeMapCampus(buttonIndex);
+        //this.setState({ clicked: BUTTONS[buttonIndex] });
+      });
+  }
+
   componentWillReceiveProps(nextProps) {
     let region;
     if (nextProps.map.campus !== 'none') {
@@ -38,6 +61,7 @@ class MapPage extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <NavigationBar title='校园地图' />
         <MapView style={styles.map}
                  region={this.state.region || undefined}
                  annotations={this.state.annotations || undefined}

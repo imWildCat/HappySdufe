@@ -10,10 +10,7 @@ import React, {
   ListView,
 } from 'react-native';
 
-import moment from 'moment';
-import zhLocale from 'moment/locale/zh-cn';
-moment.locale('zh-cn', zhLocale);
-
+import moment from '../../../utils/moment';
 import NewsCategoryNames from '../../../constants/news_category_names';
 
 class NewsList extends Component {
@@ -24,7 +21,7 @@ class NewsList extends Component {
   }
 
   render() {
-    let { news, loadSingleNews } = this.props;
+    let { news, fetchSingleNews } = this.props;
     let currentCategoryName = NewsCategoryNames[news.currentCategoryID - 1];
     let currentCategoryPages = news[currentCategoryName].pages;
 
@@ -37,13 +34,15 @@ class NewsList extends Component {
           renderRow={(rowData) => <NewsListRow
           key={`news_${rowData.id}`}
           data={rowData}
-          loadSingleNews={loadSingleNews} />}
+          fetchSingleNews={fetchSingleNews} />}
           />
       );
     } else {
       return (
-        <View>
-          <Text>No data</Text>
+        <View style={parentStyles.notFoundWrapper}>
+          <View style={parentStyles.notFoundTextWrapper}>
+            <Text>没有找到这个分类下的相关新闻。</Text>
+          </View>
         </View>
       )
     }
@@ -51,20 +50,32 @@ class NewsList extends Component {
   }
 }
 
+let parentStyles = StyleSheet.create({
+  notFoundWrapper: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1
+  },
+  notFoundTextWrapper: {
+    flex: 1,
+    paddingTop: 30
+  }
+});
+
 NewsList.propTypes = {
   news: PropTypes.object.isRequired,
-  loadSingleNews: PropTypes.func.isRequired,
+  fetchSingleNews: PropTypes.func.isRequired,
 };
 
 
 class NewsListRow extends Component {
 
   render() {
-    let { data, loadSingleNews } = this.props;
+    let { data, fetchSingleNews } = this.props;
     return (
       <TouchableHighlight underlayColor='#D8D8D8' onPress={() => {
         if (data.id) {
-          loadSingleNews(data.id);
+          fetchSingleNews(data.id);
         } else {
           console.log('ID of this news is not defined.');
         }
@@ -91,7 +102,7 @@ class NewsListRow extends Component {
 
 NewsListRow.propTypes = {
   data: PropTypes.object.isRequired,
-  loadSingleNews: PropTypes.func.isRequired,
+  fetchSingleNews: PropTypes.func.isRequired,
 };
 
 let styles = StyleSheet.create({

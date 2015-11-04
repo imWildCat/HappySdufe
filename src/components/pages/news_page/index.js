@@ -11,6 +11,7 @@ var {
   TouchableOpacity,
   } = React;
 
+import NavigationBar from '../../commons/navigation_bar';
 import NewsList from './news_list';
 
 import NewsCategoryNames from '../../../constants/news_category_names';
@@ -34,7 +35,7 @@ class MenuButton extends Component {
 class NewsPage extends Component {
 
   componentDidMount() {
-    this.props.loadNewsList();
+    this.props.fetchNewsList();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -53,6 +54,7 @@ class NewsPage extends Component {
 
     return (
       <View style={styles.container}>
+        <NavigationBar title='校园新闻' />
         <View style={styles.scrollViewWrapper}>
           <ScrollView showsHorizontalScrollIndicator={false} horizontal={true}>
             {menuButtons}

@@ -2,12 +2,12 @@
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux/native';
-import NewsPage from '../components/pages/news_page';
+import SingleNewsPage from '../components/pages/single_news';
 import * as NewsActions from '../actions/news';
 
 function mapStateToProps(state) {
   return {
-    news: state.news.newsList,
+    state: state.news.singleNews,
   };
 }
 
@@ -15,4 +15,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(NewsActions, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewsPage);
+export default connect(mapStateToProps, mapDispatchToProps)(SingleNewsPage);

@@ -12,6 +12,7 @@ import React, {
 
 import HtmlRender from 'react-native-html-render';
 
+import NavigationBar from '../../commons/navigation_bar';
 import content from './content';
 
 class BusPage extends Component {
@@ -20,7 +21,7 @@ class BusPage extends Component {
 
     return (
       <View style={styles.container}>
-
+        <NavigationBar title='校车时刻' />
         <ScrollView
           automaticallyAdjustContentInsets={false}
           scrollEventThrottle={200}

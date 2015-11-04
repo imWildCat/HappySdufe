@@ -2,10 +2,17 @@
 
 let types = require('../constants/action_types');
 
-export function loadNewsList(categoryID = 0, page = 1) {
+export function fetchNewsList(categoryID = 0, page = 1) {
   return {
     types: [types.NEWS_LIST_REQUEST, types.NEWS_LIST_SUCCESS, types.NEWS_LIST_FAILURE],
     apiRequest: (client) => client.get(`news/category/${categoryID}/page/${page}`)
+  }
+}
+
+export function fetchSingleNews(newsID) {
+  return {
+    types: [types.SINGLE_NEWS_REQUEST, types.SINGLE_NEWS_SUCCESS, types.SINGLE_NEWS_FAILURE],
+    apiRequest: (client) => client.get(`news/id/${newsID}`)
   }
 }
 
@@ -16,15 +23,8 @@ export function changeNewsCategory(categoryID = 1) {
   }
 }
 
-export function loadSingleNews(newsID) {
+export function shouldNotShowSingleNews() {
   return {
-    type: types.LOAD_SINGLE_NEWS,
-    id: newsID
-  }
-}
-
-export function closeSingleNews() {
-  return {
-    type: types.CLOSE_SINGLE_NEWS
+    type: types.SHOULD_NOT_SHOW_SINGLE_NEWS
   }
 }

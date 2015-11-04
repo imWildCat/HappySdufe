@@ -5,9 +5,6 @@ import React, {
   PropTypes,
   View,
 } from 'react-native';
-
-import NavigationBar from './navigation_bar';
-
 import TabView from '../tab_view';
 
 import TabViewContainer from '../../../containers/tab_view';
@@ -45,7 +42,6 @@ class NavigationContent extends Component {
 
     return (
       <View style={{ flex: 1 }}>
-        <NavigationBar {...this.props} />
 
         { page }
 

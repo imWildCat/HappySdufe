@@ -12,9 +12,20 @@ import React,{
 class NavigationBar extends Component {
 
   render() {
+
+    let { onBack } = this.props;
+    let backText = '';
+    if(onBack) {
+      backText = '< 返回';
+    }
+
     return (
       <View style={styles.container}>
-        <View style={styles.barButton}></View>
+        <View style={styles.barButton}>
+          <TouchableOpacity onPress={() => this.props.onBack()}>
+            <Text style={styles.barButtonText}>{backText}</Text>
+          </TouchableOpacity>
+        </View>
         <View style={styles.titleContainer}>
           <Text style={styles.title}>{this.props.title}</Text>
         </View>
@@ -30,9 +41,9 @@ class NavigationBar extends Component {
 
 NavigationBar.propTypes = {
   title: PropTypes.string.isRequired,
-  tab: PropTypes.string.isRequired,
   rightBarButtonText: PropTypes.string,
-  onRightBarButtonClick: PropTypes.func
+  onRightBarButtonClick: PropTypes.func,
+  onBack: PropTypes.func
 };
 
 var styles = StyleSheet.create({
@@ -47,7 +58,7 @@ var styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingTop:15
+    paddingTop: 15
   },
   title: {
     fontSize: 16,
