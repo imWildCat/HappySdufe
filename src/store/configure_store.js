@@ -6,6 +6,9 @@ import createLogger from 'redux-logger';
 import APIRequestMiddleware from '../middlewares/api_request_middleware';
 import APIClient from '../utils/api_client';
 import reducer from '../reducers';
+import {checkAndGetToken} from '../utils/device_token';
+
+checkAndGetToken();
 
 export default function configureStore(initialState) {
   let apiRequestMiddleware = APIRequestMiddleware(new APIClient());

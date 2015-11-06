@@ -17,9 +17,6 @@ class NewsList extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      footer: '点击加载更多'
-    };
   }
 
   static _generateDataSource(pageData) {

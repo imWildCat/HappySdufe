@@ -24,10 +24,9 @@ class TextBox extends Component {
         image = require('image!add');
     }
 
-    let { onClick, placeholder } = this.props;
+    let { placeholder } = this.props;
 
     return (
-
       <View>
         <View style={styles.wrapper}>
           <TextInput style={styles.textInput}
@@ -35,14 +34,23 @@ class TextBox extends Component {
                      keyboardType='ascii-capable'
                      autoCapitalize='none'
                      underlineColorAndroid='#FFFFFF'
+                     onChangeText={this._onValueChage.bind(this)}
             />
           <View style={styles.verticalLine}></View>
-          <TouchableOpacity style={styles.imageButton} onPress={() => onClick()}>
+          <TouchableOpacity style={styles.imageButton} onPress={this._onButtonClick.bind(this)}>
             <Image style={styles.image} source={image}/>
           </TouchableOpacity>
         </View>
       </View>
     )
+  }
+
+  _onValueChage(text) {
+    this.text = text;
+  }
+
+  _onButtonClick() {
+    this.props.onClick(this.text);
   }
 }
 

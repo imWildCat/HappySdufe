@@ -109,4 +109,4 @@ let styles = StyleSheet.create({
   }
 });
 
-module.exports = NewsPage;
+export default NewsPage;

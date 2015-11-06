@@ -10,13 +10,15 @@ import React, {
 
 import NavigationBar from '../../commons/navigation_bar';
 
+import GaodeMapView from '../../natives/gaode_map_view';
+
 class SettingPage extends Component {
 
   render() {
     return (
       <View style={styles.container}>
         <NavigationBar title='偏好设置' />
-        <Text>This is setting page</Text>
+        <GaodeMapView style={{ flex: 1}} />
       </View>
     )
   }
