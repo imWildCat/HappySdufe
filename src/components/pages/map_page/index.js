@@ -6,12 +6,13 @@ import React, {
   StyleSheet,
   Text,
   View,
-  MapView,
   PropTypes,
   ActionSheetIOS,
 } from 'react-native';
 
 import NavigationBar from '../../commons/navigation_bar';
+
+import MapView from '../../natives/custom_map_view'
 
 import points from './points';
 
@@ -88,13 +89,25 @@ class MapPage extends Component {
     return (
       <View style={styles.container}>
         <NavigationBar title={title} rightBarButtonText='选择校区'
+                       style={{height: 56}}
+                       actions={[
+                       {title: '舜耕校区', icon: require('image!bus'), show: 'never'},
+                       {title: '燕山校区', show: 'never'},
+                       {title: '圣井校区', show: 'never'},
+                       {title: '明水校区', show: 'never'}
+                       ]}
+                       onActionSelected={this._onActionSelected.bind(this)}
                        onRightBarButtonClick={this._showActionSheet.bind(this)}/>
         <MapView style={styles.map}
                  region={this.state.region || undefined}
                  annotations={this.state.annotations || undefined}
-          />
+        />
       </View>
     )
+  }
+
+  _onActionSelected(position) {
+    this.props.changeMapCampus(position);
   }
 }
 

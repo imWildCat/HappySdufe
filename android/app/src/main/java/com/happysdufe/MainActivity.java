@@ -1,6 +1,7 @@
 package com.happysdufe;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.KeyEvent;
 
@@ -9,12 +10,17 @@ import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactRootView;
 import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
 import com.facebook.react.shell.MainReactPackage;
-import com.facebook.soloader.SoLoader;
 
 public class MainActivity extends Activity implements DefaultHardwareBackBtnHandler {
 
     private ReactInstanceManager mReactInstanceManager;
     private ReactRootView mReactRootView;
+
+    private static Activity _activity;
+
+    public static Activity getInstance() {
+        return MainActivity._activity;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,13 +32,15 @@ public class MainActivity extends Activity implements DefaultHardwareBackBtnHand
                 .setBundleAssetName("index.android.bundle")
                 .setJSMainModuleName("index.android")
                 .addPackage(new MainReactPackage())
+                .addPackage(new MCGaodeMapPackage())
                 .setUseDeveloperSupport(BuildConfig.DEBUG)
                 .setInitialLifecycleState(LifecycleState.RESUMED)
                 .build();
 
         mReactRootView.startReactApplication(mReactInstanceManager, "HappySdufe", null);
-
         setContentView(mReactRootView);
+
+        _activity = this;
     }
 
     @Override

@@ -1,13 +1,25 @@
 'use strict';
 
-import { requireNativeComponent } from 'react-native';
+import React, { requireNativeComponent, PropTypes } from 'react-native';
 
 let iface = {
   name: 'MCGaodeMapView',
   propTypes: {
-    //src: PropTypes.string,
-    //borderRadius: PropTypes.number,
-    //resizeMode: PropTypes.oneOf(['cover', 'contain', 'stretch']),
+    scaleX: PropTypes.number,
+    scaleY: PropTypes.number,
+    translateY: PropTypes.number,
+    translateX: PropTypes.number,
+    rotation: PropTypes.number,
+    // Custom
+    region: PropTypes.shape({
+      latitude: React.PropTypes.number.isRequired,
+      longitude: React.PropTypes.number.isRequired
+    }),
+    annotations: React.PropTypes.arrayOf(React.PropTypes.shape({
+      title: React.PropTypes.string.isRequired,
+      longitude: React.PropTypes.number.isRequired,
+      latitude: React.PropTypes.number.isRequired
+    })),
   },
 };
 
