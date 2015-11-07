@@ -6,7 +6,8 @@ import React, {
   Component,
   View,
   Text,
-  ListView
+  ListView,
+  TouchableHighlight
 } from 'react-native';
 
 import moment from '../../../utils/moment';
@@ -23,7 +24,7 @@ class FileCodeList extends Component {
       <View style={styles.container}>
         <ListView
           dataSource={FileCodeList._generateDataSource(this.props.files)}
-          renderRow={this._renderRow}/>
+          renderRow={this._renderRow.bind(this)}/>
       </View>
     )
   }
@@ -34,27 +35,31 @@ class FileCodeList extends Component {
       createdAt = moment(rowData.created_at).fromNow();
     }
     let code = rowData.code;
-    ;
     let status = '' + code;
     let style = styles.statusTextNormal;
     if (!rowData.is_downloaded) {
       status = `${code}  (服务器缓存中)`;
       style = styles.statusTextDownloading;
     }
+
+    let { onRowPress } = this.props;
     return (
-      <View style={styles.rowContainer}>
-        <Text style={styles.fileCodeDescription}>{rowData.description}</Text>
-        <View style={styles.metaContainer}>
-          <Text style={style}>{status}</Text>
-          <Text style={styles.fileCodeCreatedTime}>{createdAt}</Text>
+      <TouchableHighlight underlayColor='#D8D8D8' onPress={() => onRowPress(rowData.id)}>
+        <View style={styles.rowContainer}>
+          <Text style={styles.fileCodeDescription}>{rowData.description}</Text>
+          <View style={styles.metaContainer}>
+            <Text style={style}>{status}</Text>
+            <Text style={styles.fileCodeCreatedTime}>{createdAt}</Text>
+          </View>
         </View>
-      </View>
+      </TouchableHighlight>
     )
   }
 }
 
 FileCodeList.propTypes = {
-  files: PropTypes.array.isRequired
+  files: PropTypes.array.isRequired,
+  onRowPress: PropTypes.func.isRequired
 };
 
 let styles = StyleSheet.create({

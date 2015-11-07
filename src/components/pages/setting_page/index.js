@@ -5,30 +5,68 @@ import React, {
   Proptypes,
   StyleSheet,
   Text,
-  View
+  View,
+  TouchableOpacity
 } from 'react-native';
 
 import NavigationBar from '../../commons/navigation_bar';
 
-import GaodeMapView from '../../natives/gaode_map_view';
+//import GaodeMapView from '../../natives/gaode_map_view';
 
 class SettingPage extends Component {
 
   render() {
     return (
       <View style={styles.container}>
-        <NavigationBar title='偏好设置' />
-        <GaodeMapView style={{ flex: 1}} />
+        <NavigationBar title='偏好设置'/>
+        <View style={styles.settingBlockWrapper}>
+          <TouchableOpacity>
+            <Text style={styles.settingLabel}>清理缓存</Text>
+          </TouchableOpacity>
+
+          <View style={styles.line}>
+          </View>
+
+          <TouchableOpacity onPress={this._onAboutButtonPress.bind(this)}>
+            <Text style={styles.settingLabel}>关于</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     )
+  }
+
+  _onAboutButtonPress() {
+    let { onForward } = this.props;
+    onForward('AboutPageContainer');
   }
 
 }
 
 let styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
+  settingBlockWrapper: {
+    borderColor: '#F5F0E9',
+    borderWidth: 4,
+    borderRadius: 8,
+    backgroundColor: '#FFFFFF',
+    margin: 16
+  },
+  line: {
+    backgroundColor: '#F5F0E9',
+    marginLeft: 16,
+    marginRight: 16,
+    height: 2,
+  },
+  settingLabel: {
+    flex: 1,
+    fontSize: 16,
+    margin: 10,
+    marginLeft: 16,
+    marginRight: 16,
+    color: '#333333'
+  }
 });
 
 export default SettingPage;

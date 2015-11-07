@@ -183,7 +183,6 @@ let styles = StyleSheet.create({
   },
   title: {
     fontSize: 16,
-    fontWeight: 'bold',
     color: "#333333",
   },
   meta: {

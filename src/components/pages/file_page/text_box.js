@@ -24,12 +24,13 @@ class TextBox extends Component {
         image = require('image!add');
     }
 
-    let { placeholder } = this.props;
+    let { placeholder, style, value } = this.props;
 
     return (
-      <View>
+      <View style={style}>
         <View style={styles.wrapper}>
           <TextInput style={styles.textInput}
+                     value={value}
                      placeholder={placeholder}
                      keyboardType='ascii-capable'
                      autoCapitalize='none'
@@ -58,11 +59,11 @@ TextBox.propTypes = {
   placeholder: PropTypes.string,
   image: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
+  value: PropTypes.string
 };
 
 let styles = StyleSheet.create({
   wrapper: {
-    margin: 16,
     height: 50,
     borderColor: '#F5F0E9',
     borderWidth: 4,
@@ -76,7 +77,7 @@ let styles = StyleSheet.create({
     flex: 1,
     marginLeft: 13,
     fontSize: 15,
-    color: '#333333',
+    color: '#A7A4A0',
   },
   imageButton: {
     width: 15,

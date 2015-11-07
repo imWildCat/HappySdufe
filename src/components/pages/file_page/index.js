@@ -20,17 +20,18 @@ class FilePage extends Component {
 
   render() {
 
-    let { file } = this.props;
+    let { fileList } = this.props;
 
     return (
       <View style={styles.container}>
         <NavigationBar title='文件交换' />
         <TextBox
+          style={styles.textBox}
           image='add'
           onClick={this._onTextBoxClick.bind(this)}
           placeholder='请输入提取码'
           />
-        <FileCodeList files={file.fileList.files} />
+        <FileCodeList files={fileList.files} onRowPress={this._onRowPress.bind(this)}/>
       </View>
     )
   }
@@ -40,12 +41,21 @@ class FilePage extends Component {
       this.props.addFileCode(text);
     }
   }
+
+  _onRowPress(codeID) {
+    let { onForward, fetchSingleFileCode } = this.props;
+    onForward('FileDetailPageContainer');
+    fetchSingleFileCode(codeID);
+  }
 }
 
 let styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
+  textBox: {
+    margin: 16
+  }
 });
 
 export default FilePage;

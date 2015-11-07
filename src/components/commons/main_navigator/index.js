@@ -9,6 +9,8 @@ import React, {
 var NavigationContent = require('./navigation_content');
 
 import SingleNewsContainer from '../../../containers/single_news_page';
+import FileDetailPageContainer from '../../../containers/file_detail_page';
+import AboutPageContainer from '../../../containers/about_page';
 
 class MainNavigator extends Component {
 
@@ -62,30 +64,51 @@ class MainNavigator extends Component {
 
   _renderScene(route, navigator) {
 
-    if(route.componentName) {
+    if (route.componentName) {
       switch (route.componentName) {
-        case 'SingleNewsContainer':
-          default:
-            return (
-              <SingleNewsContainer
-                onBack={() => {
+        case 'FileDetailPageContainer':
+          return (
+            <FileDetailPageContainer
+              onBack={() => {
                             if (route.index > 0) {
                                 navigator.pop();
                             }
                         }}
-                />
-            )
+            />
+          )
+        case 'AboutPageContainer':
+          return (
+            <AboutPageContainer
+              onBack={() => {
+                            if (route.index > 0) {
+                                navigator.pop();
+                            }
+                        }}
+            />
+          )
+        case 'SingleNewsContainer':
+        default:
+          return (
+            <SingleNewsContainer
+              onBack={() => {
+                            if (route.index > 0) {
+                                navigator.pop();
+                            }
+                        }}
+            />
+          )
       }
     }
 
     return (<NavigationContent
       name={route.name}
       tab={route.tab}
-      onForward={() => {
+      onForward={(componentName) => {
                             var nextIndex = route.index + 1;
                             navigator.push({
                                 name: 'Scene ' + nextIndex,
                                 index: nextIndex,
+                                componentName: componentName
                             });
                         }}
       onBack={() => {
@@ -93,7 +116,7 @@ class MainNavigator extends Component {
                                 navigator.pop();
                             }
                         }}
-      />)
+    />)
   }
 
   render() {
@@ -107,9 +130,9 @@ class MainNavigator extends Component {
         ref={view => this.navigator = view}
         initialRoute={{name: title, index: 0, tab: tab}}
         renderScene={this._renderScene}
-        />
+      />
     );
   }
 }
 
-module.exports = MainNavigator;
+export default MainNavigator;

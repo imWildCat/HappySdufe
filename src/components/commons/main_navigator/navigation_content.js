@@ -24,20 +24,20 @@ class NavigationContent extends Component {
     let page;
     switch (tab) {
       case 'bus':
-        page = <BusPage />;
+        page = <BusPage {...this.props} />;
         break;
       case 'file':
-        page = <FilePageContainer />;
+        page = <FilePageContainer {...this.props} />;
         break;
       case 'map':
-        page = <MapPageContainer />;
+        page = <MapPageContainer {...this.props} />;
         break;
       case 'news':
-        page = <NewsPageContainer />;
+        page = <NewsPageContainer {...this.props} />;
         break;
       case 'setting':
       default:
-        page = <SettingPage />
+        page = <SettingPage {...this.props} />
     }
 
     return (

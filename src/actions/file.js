@@ -16,3 +16,11 @@ export function fetchFileCodeList() {
     apiRequest: (client) => client.get(`file_code/list`),
   }
 }
+
+export function fetchSingleFileCode(codeID) {
+  return {
+    types: [types.FILE_CODE_SINGLE_REQUEST, types.FILE_CODE_SINGLE_SUCCESS, types.FILE_CODE_SINGLE_FAILURE],
+    apiRequest: (client) => client.get(`file_code/${codeID}`),
+    codeID: codeID
+  }
+}

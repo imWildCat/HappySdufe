@@ -61,6 +61,30 @@ function _getIndexOfFileCode(fileCodeArray, fileCode) {
   }
 }
 
+function currentFileCode(state = {
+  isLoading: false,
+  data: {code: null, files: []}
+}, action) {
+  switch (action.type) {
+    case types.FILE_CODE_SINGLE_REQUEST:
+      return Object.assign({}, state, {
+        isLoading: true,
+      });
+    case types.FILE_CODE_SINGLE_SUCCESS:
+      return Object.assign({}, state, {
+        isLoading: false,
+        data: action.json
+      });
+    case types.FILE_CODE_SINGLE_FAILURE:
+      return Object.assign({}, state, {
+        isLoading: false,
+      });
+    default:
+      return state;
+  }
+}
+
 export default combineReducers({
   fileList,
+  currentFileCode,
 })

@@ -24,8 +24,6 @@ class SingleNewsPage extends Component {
   render() {
     let { state } = this.props;
 
-    console.log(state);
-
     let content;
     if (state.isLoading) {
       content = <ActivityIndicator autoMargin={true}/>;
