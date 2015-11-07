@@ -14,7 +14,7 @@ var {
 import NavigationBar from '../../commons/navigation_bar';
 import NewsList from './news_list';
 
-import NewsCategoryNames from '../../../constants/news_category_names';
+import NewsCategoryNames, { getCategoryTabList } from '../../../constants/news_category_names';
 
 class MenuButton extends Component {
 
@@ -42,19 +42,19 @@ class NewsPage extends Component {
     // News list array and menu
     this.newsListArray = [];
 
-    NewsCategoryNames.forEach((name, index) => {
-      this.newsListArray.push(<NewsList key={'list_' + (index + 1)} {...this.props} categoryID={index + 1} />);
+    getCategoryTabList().forEach((element, index) => {
+      this.newsListArray.push(<NewsList key={'list_' + (index + 1)} {...this.props} categoryID={element.id + 1}/>);
     });
   }
 
   render() {
     let { news, changeNewsCategory } = this.props;
     let menuButtons = [];
-    NewsCategoryNames.forEach((name, index) => {
+    getCategoryTabList().forEach((element, index) => {
       menuButtons.push(<MenuButton key={`btn_${index}`}
-                                        isHighlighted={index + 1 == news.currentCategoryID}
-                                        text={name}
-                                        onClick={() => changeNewsCategory(index + 1)}/>)
+                                   isHighlighted={index + 1 == news.currentCategoryID}
+                                   text={element.name}
+                                   onClick={() => changeNewsCategory(index + 1)}/>)
     });
 
     return (

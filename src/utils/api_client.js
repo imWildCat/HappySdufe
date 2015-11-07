@@ -38,14 +38,14 @@ export default class APIClient {
 
   static _buildURL(uri) {
     var baseURL;
-    if (__DEV__) {
+    if (false) {
       if (Platform.OS == 'android') {
         baseURL = 'http://10.0.3.2:5000/api/v1/';
       } else {
         baseURL = 'http://localhost:5000/api/v1/';
       }
     } else {
-      baseURL = 'http://h-sdufe-api.example.com/api/v1/';
+      baseURL = 'http://hs-app.gamego.cc/api/v1/';
     }
     return baseURL + uri;
   }

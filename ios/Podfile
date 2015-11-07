@@ -2,7 +2,8 @@
 platform :ios, '7.0'
 
 target 'HappySdufe' do
-  pod 'Toast', '~> 3.0'
+#  'KVNProgress'
+  pod 'AFNetworking'
 end
 
 target 'HappySdufeTests' do

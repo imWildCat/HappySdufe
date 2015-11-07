@@ -23,6 +23,7 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
+		5ED4DCD01BEDF2EB008EAEDD /* ToastManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ED4DCCF1BEDF2EB008EAEDD /* ToastManager.m */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 /* End PBXBuildFile section */
 
@@ -127,6 +128,8 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = HappySdufe/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = HappySdufe/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
+		5ED4DCCE1BEDF2EB008EAEDD /* ToastManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToastManager.h; sourceTree = "<group>"; };
+		5ED4DCCF1BEDF2EB008EAEDD /* ToastManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToastManager.m; sourceTree = "<group>"; };
 		600108607839D24E805088B6 /* Pods-HappySdufe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HappySdufe.release.xcconfig"; path = "Pods/Target Support Files/Pods-HappySdufe/Pods-HappySdufe.release.xcconfig"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
@@ -238,6 +241,7 @@
 		13B07FAE1A68108700A75B9A /* HappySdufe */ = {
 			isa = PBXGroup;
 			children = (
+				5ED4DCCD1BEDF2EB008EAEDD /* Modules */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -255,6 +259,15 @@
 				146834041AC3E56700842450 /* libReact.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		5ED4DCCD1BEDF2EB008EAEDD /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				5ED4DCCE1BEDF2EB008EAEDD /* ToastManager.h */,
+				5ED4DCCF1BEDF2EB008EAEDD /* ToastManager.m */,
+			);
+			path = Modules;
 			sourceTree = "<group>";
 		};
 		754F6AC0CB01885EFBE5C15E /* Frameworks */ = {
@@ -360,6 +373,7 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				E290B6E4A43674DE1858C394 /* Copy Pods Resources */,
+				A610C401B51627814900329D /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -543,6 +557,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		A610C401B51627814900329D /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HappySdufe/Pods-HappySdufe-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		E290B6E4A43674DE1858C394 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -589,6 +618,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				5ED4DCD01BEDF2EB008EAEDD /* ToastManager.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -667,8 +697,16 @@
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 				);
 				INFOPLIST_FILE = HappySdufe/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-framework",
+					"\"QuartzCore\"",
+					"-ObjC",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.wildcat.HappySdufe;
 				PRODUCT_NAME = HappySdufe;
 				PROVISIONING_PROFILE = "";
 			};
@@ -687,8 +725,16 @@
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 				);
 				INFOPLIST_FILE = HappySdufe/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-framework",
+					"\"QuartzCore\"",
+					"-ObjC",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.wildcat.HappySdufe;
 				PRODUCT_NAME = HappySdufe;
 				PROVISIONING_PROFILE = "";
 			};
