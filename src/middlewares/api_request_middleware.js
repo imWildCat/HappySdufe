@@ -15,9 +15,19 @@ export default function APIRequestMiddleware(client) {
       const [REQUEST, SUCCESS, FAILURE] = types;
       next({...rest, type: REQUEST});
       return apiRequest(client).then(
-        (result) =>  {
+        (result) => {
           result.json().then((json)=> {
-            next({...rest, json, type: SUCCESS})
+            if (!json.error_code) {
+              next({...rest, json, type: SUCCESS})
+            } else {
+              next({
+                ...rest,
+                error: true,
+                errorCode: json.error_code,
+                errorMessage: json.error_message,
+                type: FAILURE
+              })
+            }
           });
         },
         (error) => next({...rest, error, type: FAILURE})

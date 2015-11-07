@@ -20,7 +20,7 @@ class FileCodeList extends Component {
 
   render() {
     return (
-      <View>
+      <View style={styles.container}>
         <ListView
           dataSource={FileCodeList._generateDataSource(this.props.files)}
           renderRow={this._renderRow}/>
@@ -33,15 +33,19 @@ class FileCodeList extends Component {
     if (rowData.created_at) {
       createdAt = moment(rowData.created_at).fromNow();
     }
-    let status = '';
+    let code = rowData.code;
+    ;
+    let status = '' + code;
+    let style = styles.statusTextNormal;
     if (!rowData.is_downloaded) {
-      status = '服务器缓存中';
+      status = `${code}  (服务器缓存中)`;
+      style = styles.statusTextDownloading;
     }
     return (
       <View style={styles.rowContainer}>
         <Text style={styles.fileCodeDescription}>{rowData.description}</Text>
         <View style={styles.metaContainer}>
-          <Text style={styles.statusText}>{status}</Text>
+          <Text style={style}>{status}</Text>
           <Text style={styles.fileCodeCreatedTime}>{createdAt}</Text>
         </View>
       </View>
@@ -54,7 +58,9 @@ FileCodeList.propTypes = {
 };
 
 let styles = StyleSheet.create({
-
+  container: {
+    flex: 1
+  },
   // Row
   rowContainer: {
     marginLeft: 16,
@@ -72,10 +78,15 @@ let styles = StyleSheet.create({
     flexDirection: 'row',
     marginTop: 5
   },
-  statusText: {
+  statusTextNormal: {
     flex: 1,
     fontSize: 14,
-    color: 'red'
+    color: '#747474'
+  },
+  statusTextDownloading: {
+    flex: 1,
+    fontSize: 14,
+    color: '#FF9600'
   },
   fileCodeCreatedTime: {
     flex: 1,

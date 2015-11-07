@@ -16,11 +16,17 @@ function fileList(state = {
       let fileCode = action.json;
       let newElement = {
         id: fileCode.file_code_id,
-        description: fileCode.file_names[0],
+        code: fileCode.file_code,
+        description: fileCode.description,
         is_downloaded: fileCode.is_downloaded,
         created_at: null
       };
-      files.unshift(newElement);
+      let oldElementIndex = _getIndexOfFileCode(files, fileCode.file_code);
+      if (oldElementIndex > -1) {
+        files[oldElementIndex] = newElement;
+      } else {
+        files.unshift(newElement);
+      }
       return Object.assign({}, state, {
         isLoading: false,
         files: files
@@ -43,6 +49,15 @@ function fileList(state = {
       });
     default:
       return state;
+  }
+}
+
+function _getIndexOfFileCode(fileCodeArray, fileCode) {
+  for (var index in fileCodeArray) {
+    if (fileCodeArray[index].code == fileCode) {
+      return index;
+    }
+    return -1;
   }
 }
 

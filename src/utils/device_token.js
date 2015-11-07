@@ -13,10 +13,17 @@ if (Platform.OS === 'android') {
 
 let client = new APIClient();
 
+let _lastCheckTime = new Date(2000, 0, 0, 0, 0);
+
 setCheckTokenFunction(function() {
   if(!getIsDeviceTokenOk()) {
-    console.log('check');
-    checkAndGetToken();
+    let now = new Date();
+    // Calculate diff to avoid loop checking
+    let diff = (now - _lastCheckTime) / 1000;
+    if (diff >= 10) {
+      checkAndGetToken();
+      _lastCheckTime = now;
+    }
   }
 });
 
