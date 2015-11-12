@@ -15,10 +15,16 @@ import moment from '../../../utils/moment';
 import NavigationBar from '../../commons/navigation_bar';
 import ActivityIndicator from '../../commons/activity_indicator';
 
+import ProgressHUD from '../../../modules/progress';
+import WebBrowser from '../../../modules/web_browser';
+
 class SingleNewsPage extends Component {
 
   _onLinkPress(url) {
-    console.log(url);
+    if (url.indexOf('download.php') == 0) {
+      url = 'http://pub.sdufe.edu.cn/news/' + url;
+    }
+    WebBrowser.open(url);
   }
 
   render() {
@@ -26,8 +32,10 @@ class SingleNewsPage extends Component {
 
     let content;
     if (state.isLoading) {
+      ProgressHUD.show();
       content = <ActivityIndicator autoMargin={true}/>;
     } else {
+      ProgressHUD.hide();
       let news = state.news;
       content = (
         <ScrollView style={styles.scrollView}>

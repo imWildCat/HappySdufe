@@ -10,11 +10,15 @@
 #import "AppDelegate.h"
 
 #import "RCTRootView.h"
+#import <KVNProgress/KVNProgress.h>
+
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  [self setUpKVNProgress];
+  
   NSURL *jsCodeLocation;
 
   /**
@@ -50,12 +54,27 @@
                                                initialProperties:nil
                                                    launchOptions:launchOptions];
 
+//  UIView *wrapperView = [[UIView alloc] initWithFrame: [UIScreen mainScreen].bounds];
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
   UIViewController *rootViewController = [[UIViewController alloc] init];
   rootViewController.view = rootView;
+  _rootView = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
   return YES;
+}
+
+- (void)setUpKVNProgress {
+  KVNProgressConfiguration *configuration = [[KVNProgressConfiguration alloc] init];
+  
+  configuration.fullScreen = NO;
+  configuration.minimumSuccessDisplayTime = 0.6;
+  configuration.minimumErrorDisplayTime = 1.2;
+  
+  configuration.tapBlock = ^(KVNProgress *progressView) {
+    [KVNProgress dismiss];
+  };
+  [KVNProgress setConfiguration: configuration];
 }
 
 @end

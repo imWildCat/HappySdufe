@@ -13,6 +13,8 @@ import NavigationBar from '../../commons/navigation_bar';
 
 import defaultHtml from './default_html';
 
+import WebBrowser from '../../../modules/web_browser';
+
 class AboutPage extends Component {
 
   componentWillMount() {
@@ -35,7 +37,7 @@ class AboutPage extends Component {
   }
 
   _onLinkPress(url) {
-
+    WebBrowser.open(url);
   }
 }
 

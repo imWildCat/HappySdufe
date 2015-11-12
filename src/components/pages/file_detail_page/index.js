@@ -15,6 +15,11 @@ import TextBox from '../file_page/text_box';
 
 import moment from '../../../utils/moment';
 
+import Toast from '../../../modules/toast';
+import Pasteboard from '../../../modules/pasteboard';
+import ProgressHUD from '../../../modules/progress';
+
+
 class FileDetailPage extends Component {
 
   render() {
@@ -24,8 +29,10 @@ class FileDetailPage extends Component {
     let content;
 
     if (isLoading) {
+      ProgressHUD.show();
       content = <ActivityIndicator autoMargin={true}/>
     } else {
+      ProgressHUD.hide();
       let files = this._renderFiles(data);
       content = <ScrollView style={styles.scrollView}>
         <Text style={styles.title}>{ data.code }</Text>
@@ -65,7 +72,8 @@ class FileDetailPage extends Component {
   }
 
   _copyURL(url) {
-    console.log(url);
+    Pasteboard.set(url);
+    Toast.show('下载地址已复制');
   }
 }
 

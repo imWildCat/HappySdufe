@@ -22,12 +22,16 @@ DerivedData
 *.xcuserstate
 project.xcworkspace
 ios/Pods
+ios/main.jsbundle
 
 # Android/IJ
 #
 .idea
 .gradle
 local.properties
+android/app/release-key.keystore
+android/app/src/main/assets/index.android.bundle
+*.apk
 
 # node.js
 #

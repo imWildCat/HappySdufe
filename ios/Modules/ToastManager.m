@@ -7,13 +7,18 @@
 //
 
 #import "ToastManager.h"
+#import "AppDelegate.h"
+#import <Toast/UIView+Toast.h>
 
 @implementation ToastManager
 
 RCT_EXPORT_MODULE();
 
 RCT_EXPORT_METHOD(show:(NSString *)text) {
-  NSLog(@"%@" ,text);
+  dispatch_async(dispatch_get_main_queue(), ^{
+    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    [delegate.rootView makeToast: text];
+  });
 }
 
 @end

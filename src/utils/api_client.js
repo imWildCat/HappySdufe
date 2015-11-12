@@ -38,7 +38,7 @@ export default class APIClient {
 
   static _buildURL(uri) {
     var baseURL;
-    if (false) {
+    if (__DEV__) {
       if (Platform.OS == 'android') {
         baseURL = 'http://10.0.3.2:5000/api/v1/';
       } else {

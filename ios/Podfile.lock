@@ -1,30 +1,13 @@
 PODS:
-  - AFNetworking (2.6.2):
-    - AFNetworking/NSURLConnection (= 2.6.2)
-    - AFNetworking/NSURLSession (= 2.6.2)
-    - AFNetworking/Reachability (= 2.6.2)
-    - AFNetworking/Security (= 2.6.2)
-    - AFNetworking/Serialization (= 2.6.2)
-    - AFNetworking/UIKit (= 2.6.2)
-  - AFNetworking/NSURLConnection (2.6.2):
-    - AFNetworking/Reachability
-    - AFNetworking/Security
-    - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.6.2):
-    - AFNetworking/Reachability
-    - AFNetworking/Security
-    - AFNetworking/Serialization
-  - AFNetworking/Reachability (2.6.2)
-  - AFNetworking/Security (2.6.2)
-  - AFNetworking/Serialization (2.6.2)
-  - AFNetworking/UIKit (2.6.2):
-    - AFNetworking/NSURLConnection
-    - AFNetworking/NSURLSession
+  - KVNProgress (2.2.1)
+  - Toast (3.0)
 
 DEPENDENCIES:
-  - AFNetworking
+  - KVNProgress
+  - Toast
 
 SPEC CHECKSUMS:
-  AFNetworking: 7f317038a9710cabfa43ec56396b307b45df72ab
+  KVNProgress: 7001d2d16a2755cee5599e8e485befe056f2197b
+  Toast: 32c59229abfcf41850162b83bb9259dc84372473
 
-COCOAPODS: 0.39.0
+COCOAPODS: 0.38.2

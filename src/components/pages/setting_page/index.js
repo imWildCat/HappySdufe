@@ -11,6 +11,8 @@ import React, {
 
 import NavigationBar from '../../commons/navigation_bar';
 
+import Toast from '../../../modules/toast';
+
 class SettingPage extends Component {
 
   render() {
@@ -18,7 +20,7 @@ class SettingPage extends Component {
       <View style={styles.container}>
         <NavigationBar title='偏好设置'/>
         <View style={styles.settingBlockWrapper}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={this._onClearCacheButtonPress.bind(this)}>
             <Text style={styles.settingLabel}>清理缓存</Text>
           </TouchableOpacity>
 
@@ -37,6 +39,11 @@ class SettingPage extends Component {
     let { onForward } = this.props;
     onForward('AboutPageContainer');
   }
+
+  _onClearCacheButtonPress() {
+    Toast.show('缓存已清理');
+  }
+
 
 }
 

@@ -12,6 +12,8 @@ import NavigationBar from '../../commons/navigation_bar';
 import TextBox from './text_box';
 import FileCodeList from './file_code_list';
 
+import Toast from '../../../modules/toast';
+
 class FilePage extends Component {
 
   componentDidMount() {
@@ -39,6 +41,9 @@ class FilePage extends Component {
   _onTextBoxClick(text) {
     if(text && text !== '') {
       this.props.addFileCode(text);
+      Toast.show('提取码已添加');
+    } else {
+      Toast.show('请输入提取码');
     }
   }
 
