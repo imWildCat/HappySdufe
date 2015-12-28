@@ -1,0 +1,13 @@
+PODS:
+  - KVNProgress (2.2.2)
+  - Toast (3.0)
+
+DEPENDENCIES:
+  - KVNProgress
+  - Toast
+
+SPEC CHECKSUMS:
+  KVNProgress: 4697347e21e37fdaa5264ebc24e377c205a50328
+  Toast: 32c59229abfcf41850162b83bb9259dc84372473
+
+COCOAPODS: 0.39.0
